@@ -66,7 +66,6 @@ class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentRe
 
     def _match_regex_to_file(self, content: str):
         """Find all matches of provided pattern in the content of the file."""
-        print('regex : ', self._reg_expression)
         return re.finditer(self._reg_expression, content)
 
 
