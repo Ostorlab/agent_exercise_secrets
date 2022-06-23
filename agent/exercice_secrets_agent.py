@@ -45,27 +45,29 @@ class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentRe
         logger.info('processing message %s', message)
         file_content = message.data['content'].decode("utf-8")
 
-        matched_secret = self._match_regex_to_file(file_content)
-        if matched_secret is not []:
-            technical_details = f'Found hardcoded secrets : {matched_secret}'
-            kb_entry = kb.Entry(
-                title = 'Hardcoded secret',
-                risk_rating = agent_report_vulnerability_mixin.RiskRating.HIGH,
-                references = {'reference1': 'http://www.dummy.com'},
-                short_description = 'Lorem ipsum',
-                description = 'Lorem ipsum',
-                recommendation = 'Do not harcode your secrets for god sake.'
-            )
-            self.report_vulnerability(entry=kb_entry,
-                                      technical_detail=technical_details,
-                                      risk_rating=agent_report_vulnerability_mixin.RiskRating.HIGH)
+        matched_secrets = self._match_regex_to_file(file_content)
+        if matched_secrets is not []:
+            for  matched_secret in matched_secrets:
+                technical_details = f'Found hardcoded secrets : {matched_secret.group()}'
+                kb_entry = kb.Entry(
+                    title = 'Hardcoded secret',
+                    risk_rating = agent_report_vulnerability_mixin.RiskRating.HIGH,
+                    references = {'reference1': 'http://www.dummy.com'},
+                    short_description = 'Lorem ipsum',
+                    description = 'Lorem ipsum',
+                    recommendation = 'Do not harcode your secrets for god sake.'
+                )
+                self.report_vulnerability(entry=kb_entry,
+                                        technical_detail=technical_details,
+                                        risk_rating=agent_report_vulnerability_mixin.RiskRating.HIGH)
         else:
             logger.info('File did not contain any secrets.')
 
 
     def _match_regex_to_file(self, content: str):
         """Find all matches of provided pattern in the content of the file."""
-        return re.findall(self._reg_expression, content)
+        print('regex : ', self._reg_expression)
+        return re.finditer(self._reg_expression, content)
 
 
 if __name__ == '__main__':

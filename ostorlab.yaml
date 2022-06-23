@@ -15,7 +15,7 @@ out_selectors:
 args:
   - name: reg_expression
     type: string
-    value: "[\\w]*-[\\w]*"
+    value: "([a-z0-9]+-){3}[a-z0-9]+"
     description: Regular expression to look for.
 docker_file_path : Dockerfile
 docker_build_root : .

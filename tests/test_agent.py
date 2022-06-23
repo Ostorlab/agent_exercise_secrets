@@ -8,6 +8,6 @@ def testExerciceSecretsAgent_whenRegexIsProvidedAndSecretExists_reportsFinding(
 
     secrets_agent.process(dummy_file_message)
 
-    assert len(agent_mock) == 1
+    assert len(agent_mock) == 2
     assert agent_mock[0].selector == 'v3.report.vulnerability'
     assert agent_mock[0].data['risk_rating'] == 'HIGH'
