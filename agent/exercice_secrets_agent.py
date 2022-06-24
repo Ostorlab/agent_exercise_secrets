@@ -48,7 +48,7 @@ class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentRe
         file_content = message.data['content'].decode('utf-8')
 
         matched_secrets = self._match_regex_to_file(file_content)
-        if not matched_secrets:
+        if matched_secrets:
             for  matched_secret in matched_secrets:
                 technical_details = f'Found hardcoded secrets : {matched_secret.group()}'
                 kb_entry = kb.Entry(
