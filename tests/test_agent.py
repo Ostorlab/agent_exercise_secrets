@@ -1,9 +1,9 @@
-"""Unittests for exercice secrets agent."""
+"""Unittests for exercise secrets agent."""
 
 
-def testExerciceSecretsAgent_whenRegexIsProvidedAndSecretExists_reportsFinding(
+def testExerciseSecretsAgent_whenRegexIsProvidedAndSecretExists_reportsFinding(
     agent_mock, secrets_agent, dummy_file_message):
-    """Unit test for the Exercice Secrets Agent. Case where a regular expression is provided as argument, and target
+    """Unit test for the Exercise Secrets Agent. Case where a regular expression is provided as argument, and target
     file matches. Should report the finding."""
 
     secrets_agent.process(dummy_file_message)

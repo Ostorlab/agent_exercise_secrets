@@ -1,4 +1,4 @@
-"""ExerciceSecrets agent implementation.
+"""ExerciseSecrets agent implementation.
 Agent responsible for looking into a file for any matches of a given regular expression.
 """
 import logging
@@ -20,7 +20,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentReportVulnMixin):
+class AgentExerciseSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentReportVulnMixin):
     """Agent responsible for looking into a file for any matches of a given regular expression."""
 
     def process(self, message: m.Message) -> None:
@@ -57,4 +57,4 @@ class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentRe
 
 if __name__ == '__main__':
     logger.info('starting agent ...')
-    AgentExerciceSecrets.main()
+    AgentExerciseSecrets.main()
