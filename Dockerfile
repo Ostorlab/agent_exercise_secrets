@@ -1,6 +1,7 @@
 FROM python:3.8-alpine as base
 FROM base as builder
 RUN apk add build-base
+RUN apk update
 RUN mkdir /install
 WORKDIR /install
 COPY requirement.txt /requirement.txt
@@ -12,4 +13,4 @@ ENV PYTHONPATH=/app
 COPY agent /app/agent
 COPY ostorlab.yaml /app/agent/ostorlab.yaml
 WORKDIR /app
-CMD ["python3", "/app/agent/template_agent.py"]
+CMD ["python3", "/app/agent/exercice_secrets_agent.py"]

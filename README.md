@@ -1,13 +1,5 @@
-# Template to create agents.
+## Exercice : Pattern Finder Agent
 
-## How to :
-* Create a repository from base_agent template.
-* git remote add template https://github.com/Ostorlab/template_agent.git
+This agent is part of the Ostorlab training to test the ability to write a simple agent.
 
-
-**In case new changes are made to the template**
-
-
-* git fetch template
-* git checkout [branch-to-merge-to]
-* git merge template/main
+The agent will use a regular expression as an argument to find any matching text in a file asset.
