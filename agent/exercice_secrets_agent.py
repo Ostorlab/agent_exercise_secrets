@@ -1,4 +1,6 @@
-"""ExerciceSecrets agent implementation : Agent responsible for looking into a file for any matches of a given regular expression."""
+"""ExerciceSecrets agent implementation.
+Agent responsible for looking into a file for any matches of a given regular expression.
+"""
 import logging
 from rich import logging as rich_logging
 import re
@@ -43,10 +45,10 @@ class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentRe
 
         """
         logger.info('processing message %s', message)
-        file_content = message.data['content'].decode("utf-8")
+        file_content = message.data['content'].decode('utf-8')
 
         matched_secrets = self._match_regex_to_file(file_content)
-        if matched_secrets is not []:
+        if not matched_secrets:
             for  matched_secret in matched_secrets:
                 technical_details = f'Found hardcoded secrets : {matched_secret.group()}'
                 kb_entry = kb.Entry(
