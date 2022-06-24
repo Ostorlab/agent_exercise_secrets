@@ -12,7 +12,6 @@ from ostorlab.runtimes import definitions as runtime_definitions
 from ostorlab.agent.mixins import agent_report_vulnerability_mixin
 from ostorlab.agent.kb import kb
 
-
 logging.basicConfig(
     format='%(message)s',
     datefmt='[%X]',
@@ -26,17 +25,6 @@ logger = logging.getLogger(__name__)
 class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentReportVulnMixin):
     """Agent responsible for looking into a file for any matches of a given regular expression."""
 
-    def __init__(self, agent_definition: agent_definitions.AgentDefinition,
-                 agent_settings: runtime_definitions.AgentSettings) -> None:
-        """Init method.
-        Args:
-            agent_definition: Attributes of the agent.
-            agent_settings: Settings of running instance of the agent.
-        """
-        super().__init__(agent_definition, agent_settings)
-        self._reg_expression = self.args.get('reg_expression')
-
-
     def process(self, message: m.Message) -> None:
         """Process message of type v3.asset.file. Look for any matches of the given regular expression
 
@@ -46,29 +34,27 @@ class AgentExerciceSecrets(agent.Agent, agent_report_vulnerability_mixin.AgentRe
         """
         logger.info('processing message %s', message)
         file_content = message.data['content'].decode('utf-8')
-
-        matched_secrets = self._match_regex_to_file(file_content)
+        matched_secrets = self._match_regex_to_file(file_content, self.args.get('reg_expression'))
         if matched_secrets:
-            for  matched_secret in matched_secrets:
+            for matched_secret in matched_secrets:
                 technical_details = f'Found hardcoded secrets : {matched_secret.group()}'
                 kb_entry = kb.Entry(
-                    title = 'Hardcoded secret',
-                    risk_rating = agent_report_vulnerability_mixin.RiskRating.HIGH,
-                    references = {'reference1': 'http://www.dummy.com'},
-                    short_description = 'Lorem ipsum',
-                    description = 'Lorem ipsum',
-                    recommendation = 'Do not harcode your secrets for god sake.'
+                    title='Hardcoded secret',
+                    risk_rating=agent_report_vulnerability_mixin.RiskRating.HIGH,
+                    references={'reference1': 'http://www.dummy.com'},
+                    short_description='Lorem ipsum',
+                    description='Lorem ipsum',
+                    recommendation='Do not hardcode your secrets for god sake.'
                 )
                 self.report_vulnerability(entry=kb_entry,
-                                        technical_detail=technical_details,
-                                        risk_rating=agent_report_vulnerability_mixin.RiskRating.HIGH)
+                                          technical_detail=technical_details,
+                                          risk_rating=agent_report_vulnerability_mixin.RiskRating.HIGH)
         else:
             logger.info('File did not contain any secrets.')
 
-
-    def _match_regex_to_file(self, content: str):
+    def _match_regex_to_file(self, content: str, pattern: str):
         """Find all matches of provided pattern in the content of the file."""
-        return re.finditer(self._reg_expression, content)
+        ## ToDo: add logic here.
 
 
 if __name__ == '__main__':
