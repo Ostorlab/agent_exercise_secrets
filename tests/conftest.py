@@ -1,4 +1,4 @@
-"""Pytest fixtures for the exercice secrets agent."""
+"""Pytest fixtures for the exercise secrets agent."""
 import pytest
 import pathlib
 
@@ -6,7 +6,7 @@ from ostorlab.agent import message
 from ostorlab.agent import definitions as agent_definitions
 from ostorlab.runtimes import definitions as runtime_definitions
 
-from agent import exercice_secrets_agent
+from agent import exercise_secrets_agent
 
 
 @pytest.fixture()
@@ -29,5 +29,5 @@ def secrets_agent():
             args = []
         )
 
-        agent_object = exercice_secrets_agent.AgentExerciceSecrets(definition, settings)
+        agent_object = exercise_secrets_agent.AgentExerciseSecrets(definition, settings)
         return agent_object

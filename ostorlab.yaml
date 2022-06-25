@@ -2,7 +2,7 @@ kind: Agent
 name: exercise_secrets
 version: 0.0.1
 description: |
-  ## Exercice : Dummy Secrets Finder Agent 
+  ## Exercise : Dummy Secrets Finder Agent 
 
   This agent is part of the Ostorlab trainning, with the purpose of testing the ability to write a simple agent.
   
