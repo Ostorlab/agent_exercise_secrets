@@ -1,5 +1,5 @@
 kind: Agent
-name: exercice_secrets
+name: exercise_secrets
 version: 0.0.1
 description: |
   ## Exercice : Dummy Secrets Finder Agent 
